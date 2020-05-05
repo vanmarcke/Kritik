@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h2>9 Artistes</h2>
+    <div class="card-columns">
+
+        {# Affiche tout les artistes / Dans artistRepository function find9Artists qui affiche uniquement les 9 1er dans l'ordre ASC
+        {% for artiste in artistes %}
+            {% include "artist/vignette.html.twig" %}     
+        {% endfor %} #}
+
+        {#  affiche les 9 1er artiste avec findAll() dans artistRepository #}
+        {# {% for i in 0..8 %}
+            {% include "artist/vignette.html.twig" with { "artiste": artistes [i] } %}  
+        {% endfor %} #}
+
+        {# affiche 9 artistes aléatoirement #}
+        {% for i in 0..8 %}
+            {% include "artist/vignette.html.twig" with { "artiste": random(artistes) } %} 
+        {% endfor %}
+
+    </div>
+    
+    <h2>Albums récents</h2>
+    <div class="card-columns">
+        {% for album in albums %}
+            {% include "record/vignette.html.twig" %}  
+            
+        {% endfor %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,9 @@
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">{{ artiste.name }}</h5>                
+        <p class="card-text">{{ artiste.description }}</p>
+        <a href="{{ path("artist_fiche", { id: artiste.id }) }}" class="card-link">
+            <i class="fa fa-guitar"></i> Voir plus
+        </a>                
+    </div>
+</div>

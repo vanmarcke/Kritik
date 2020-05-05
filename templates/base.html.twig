@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags("app") }}
+        {% endblock %}
+
+
+
+    </head>
+    <body>   
+
+        {% include "menu.html.twig" %}
+
+        {# pour accéder aux messages flash, je peux utiliser la variable array : app.flashes 
+           La variable objet app accessible dans les templates twig, permet d'accéder à des informations liés au projet
+         #}
+        
+        {% for type, messages in app.flashes %} {# foreach($app->flashes as type => messages) => équivalent PHP #}
+            <div class="alert alert-{{ type }} text-center">
+                {% for msg in messages %}
+                    {{ msg|raw }}                    
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+
+     <div class="container">
+    
+           <h1> {% block h1 %}Acceuil{% endblock %} </h1>
+                
+           
+
+        {% block body %}
+
+        {# la seule structure conditionnelle est if #}
+        {# pas de () pour la condition #}
+        {# les opérateurs logiques sont and, or #}
+        {% if variable > 2 and variable > 1 %}
+            {# les variables s'écrivent sans $ #}
+            {# les boubles {{ }} sont équivalent à echo #}
+            {{ variable }} est supérieur à 2
+        {% else %}
+            {{ variable }} <strong>est inférieur</strong> à 2
+        {% endif %}
+
+        <hr>
+        <h2>Boucle FOR</h2>
+        {# boucle for #}
+        {# en php : foreach($tableau as $ligne){ #}
+        {% for ligne in tableau %}
+            <p>{{ ligne }}</p>
+
+        {% endfor %}
+
+        <hr>
+        <h2>Boucle FOR avec indice</h2>
+        {# boucle for #}        
+        {% for indice, ligne in tableau %}  {# en php : foreach($tableau as $indice => $ligne){ #}        
+            <p>{{ indice ~ ":" ~ ligne }}</p> {# concaténation : ~ #}
+        {% endfor %}
+
+                <hr>
+        <h2>Boucle FOR avec condition</h2>
+        {% for i in 0..9 %}    {# en php : for($1=0 ; $i < 10 ; $i++) #}    
+            {{ i }} -
+        {% endfor %}
+        <br>
+        {% for i in 'a'..'z' %}        
+        {{ i }} <mark>-</mark>
+        {% endfor %}
+
+        <hr>
+
+        <h2>Tableau Associatif</h2>
+        <ul>
+            <li>Nom : {{ tableau_associatif.nom }}</li>
+            <li>Prénom : {{ tableau_associatif.prenom }}</li>
+            <li>Âge : {{ tableau_associatif.age }}</li>
+        </ul>
+
+        <hr>
+
+        <h2>Tableau Objet avec $objet = new stdClass</h2>
+        <ul>
+            <li>Nom : {{ objet.nom }}</li>
+            <li>Prénom : {{ objet.prenom }}</li>
+            <li>Âge : {{ objet.age }}</li>
+        </ul>
+        
+        
+        {% endblock %}
+        </div>
+
+        <footer>
+        <p> C'est le footer</p>
+        </footer>
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags("app") }}
+        {% endblock %}
+    </body>
+</html>

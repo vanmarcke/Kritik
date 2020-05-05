@@ -1,0 +1,51 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Fiche Album{% endblock %}
+
+{% block h1 %}Fiche Album{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-4">            
+            <p>Artiste : {{ album.artist.name }}</p>
+            <p>Description : {{ album.artist.description }}</p>
+        </div>
+
+        <div class="col-4">        
+            {% if album.cover is not null %}
+                <img src="{{ asset("img/") ~ album.cover }}" style="width: 100px">
+            {% endif %}       
+            <P>Titre : {{ album.title }}</p>
+            <p>Description {{ album.description }}</p>
+            <p>Sortie : {{ album.releaseAt |date("Y") }}</p>
+        </div>
+
+        <div class="col-4">
+            <ul class="list-group">
+            <p>Note moyenne :{{ noteMoyenne is null ? " _ " : noteMoyenne }} </p>
+            {% for ranking in album.rankings %}
+                <li class="list-group-item">
+                    <p>Note : {{ ranking.note }} </p>
+                    <p>Commentaire : {{ ranking.comment }} </p>
+                    <p>Membre : {{ ranking.user.email }} </p>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+    
+    {% if is_granted("ROLE_ADMIN") %}
+    <a href="{{ path("record")}}">
+        <i class="fa fa-reply"></i>
+            Retour à la liste
+    </a> 
+    {% else %}    
+    <a href="{{ path("home")}}">
+        <i class="fa fa-reply"></i>
+            Retour à l'acceuil
+    </a> 
+    {% endif %}
+    
+{% endblock %}

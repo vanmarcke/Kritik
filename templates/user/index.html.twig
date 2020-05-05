@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block h1 %}Liste des Membres{% endblock %}
+
+{% block body %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>E-Mail</th>
+                <th>Rôles</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles|join(", ") }}</td>
+                <td>
+                    <a href="{{ path("user_modifier", {"id": user.id}) }}">
+                        <i class="fa fa-edit"></i>
+                    </a>
+
+                    <a href="{{ path("user_supprimer", {"id": user.id}) }}" onclick="return confirm('Confirmation de la suppression ?');">
+                        <i class="fa fa-trash"></i>
+                    </a>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

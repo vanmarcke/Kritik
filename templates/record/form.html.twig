@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block h1 %}
+    {% if titre is defined %}
+        {{ titre }}
+    {% else %}
+        Ajouter un album
+    {% endif %}
+
+{% endblock %}
+
+{% block body %}  
+    {{ form(formRecord, { "attr": { "id": "formRecord"}}) }}
+
+    {% if album is defined %}       
+        {% if album.cover is not null %}
+            <img src="{{ asset("img/" ~ album.cover ) }}" style="width: 100px">
+        {% endif %}
+    {% endif %}    
+
+        <div class="row mt-3">        
+            <div class="form-group">
+                <button type="submit" form="formRecord" class="btn btn-primary">
+                    {{ bouton is defined ? bouton : "Enregistrer" }}
+                </button>
+            </div>
+
+            <div class="form-group ml-2">
+                <a href="{{ path("record") }}" class="btn btn-danger">Annuler</a>
+            </div>
+        </div>
+    
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Noter un album{% endblock %}
+
+{% block h1 %}Donnez une note et/ou un commentaire :{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-6">
+            <p>Album : <strong>{{ album.title }}</strong></p>
+            <p>Artiste : <strong>{{ album.artist.name }}</strong></p>
+        </div>
+
+        <div class="col-6">
+            {{ form_start(formRanking) }}
+                {{ form_widget(formRanking) }}
+            <div class="row">
+                <div class="form-group">
+                    <button class="btn btn-primary">Enregistrer</button>
+                </div>
+                <div class="form-group ml-2">
+                    <a href="{{ path("record_fiche", { "id": album.id }) }}" class="btn btn-danger">Annuler</a>
+                </div>
+            </div> 
+            {{ form_end(formRanking) }}           
+        </div>
+    </div>
+    
+{% endblock %}
+
+{# (Voir record 262)  Afficher les notes et les commentaires d'un album (ainsi que le nom du membre qui a noté) 
+dans la fiche album (vous n'avez pas besoin de modifier le Controller, tout peut être fait dans le template twig) #}

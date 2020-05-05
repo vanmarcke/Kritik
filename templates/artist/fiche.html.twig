@@ -1,0 +1,50 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Fiche Artiste{% endblock %}
+
+{% block h1 %}Fiche Artiste{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-4">
+            <p>Artiste : {{ artiste.name }}</p>
+            <p>Description : {{ artiste.description }}</p>
+        </div>
+
+        <div class="col-8">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Description</th>
+                        <th>date de sortie</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for disque in artiste.records %}
+                        <tr>
+                            <td>{{ disque.title }}</td>
+                            <td>{{ disque.description }}</td>
+                            <td>{{ disque.releaseAt |date("Y") }}</td>
+                        </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% if is_granted("ROLE_ADMIN") %}
+    <a href="{{ path("artist")}}">
+        <i class="fa fa-reply"></i>
+            Retour à la liste
+    </a> 
+    {% else %}    
+    <a href="{{ path("home")}}">
+        <i class="fa fa-reply"></i>
+            Retour à l'acceuil
+    </a> 
+    {% endif %}
+
+
+{% endblock %}

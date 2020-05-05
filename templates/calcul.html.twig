@@ -1,0 +1,14 @@
+{# la vue clacul.html.twig hérite de base.html.twig #}
+{% extends "base.html.twig" %}
+
+{# le contenu du block body de cette vue va remplacer le contenue do block body de la vue parente (=base.html.twig) #}
+{% block body %}
+    <p>Le nombre est {{ nombre }} </p>
+    <p>{{ nombre }} * 2 = {{ nombre * 2 }}</p>
+
+    {% block message %}{% endblock %}
+
+{% endblock %}
+
+{# renome le nom de l'onglet #}
+{% block title %}Calcul{% endblock %}

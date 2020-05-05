@@ -1,0 +1,17 @@
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">{{ album.title|capitalize }}</h5>                
+        <p class="card-text">{{ album.description }}</p>
+        <p class="card-text">{{ album.releaseAt|date("d/m/Y") }}</p>
+        <a href="{{ path("record_fiche", { id: album.id }) }}" class="card-link">
+            <i class="fa fa-record-vinyl"></i>
+             Voir plus
+        </a>
+
+        <a href="{{ path("noter", { id: album.id }) }}" class="card-link">
+            <i class="fa fa-record-vinyl"></i>
+             Noter
+        </a>
+
+    </div>
+</div>  

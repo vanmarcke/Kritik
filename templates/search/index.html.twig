@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche{% endblock %}
+
+{% block h1 %}Résultats de la recherche : {{ artistes|length + albums|length }} résultats{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="card-columns">
+        <h2> Artistes : {{ artistes|length }} résultats</h2>
+        {% for artist in artistes %}
+            {% include "artist/vignette.html.twig" with { "artiste": artist } %}      
+        {% endfor %}
+        </div>  
+
+
+    <div class="card-columns">
+        <h2> Albums : {{ albums|length }} résultats</h2>        
+        {# afficher les albums qui contiennent le mot de la recherché dans leur titre #}
+        {% for album in albums %}
+        {# pas besoin d'utiliser le mot clè with, la vue appelé a besoin d'une variable
+            nommée 'album' comme celle utilisée dans la boucle for #}
+            {% include "record/vignette.html.twig" %}
+        {% endfor %}
+
+     </div>
+</div>
+{% endblock %}
